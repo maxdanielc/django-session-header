@@ -10,7 +10,7 @@ class SessionMiddleware(middleware.SessionMiddleware):
 
     def process_request(self, request):
         super(SessionMiddleware, self).process_request(request)
-        sessionid = request.META.get(u'access-token')
+        sessionid = request.headers.get('access-token')
         if sessionid:
             request.session = self.SessionStore(sessionid)
             request.session.csrf_exempt = True
